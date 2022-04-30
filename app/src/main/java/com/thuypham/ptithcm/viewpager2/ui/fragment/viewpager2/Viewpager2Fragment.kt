@@ -32,8 +32,7 @@ class Viewpager2Fragment : BaseFragment<FragmentViewpager2Binding>(R.layout.frag
             if (newContent != null) {
                 listPagerItems[currentPagerPosition] = newContent
                 runOnUiThread {
-//                    viewpager2Adapter.notifyItemChanged(currentPagerPosition)
-                    viewpager2Adapter.notifyDataSetChanged()
+                    viewpager2Adapter.notifyItemChanged(currentPagerPosition)
                 }
             }
         }
