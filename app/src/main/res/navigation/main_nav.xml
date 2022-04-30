@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/main">
+
+    <fragment
+        android:id="@+id/main"
+        android:name="com.thuypham.ptithcm.viewpager2.ui.fragment.main.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main" />
+
+    <fragment
+        android:id="@+id/detail"
+        android:name="com.thuypham.ptithcm.viewpager2.ui.fragment.detail.DetailFragment"
+        android:label="DetailFragment"
+        tools:layout="@layout/fragment_detail" />
+    <fragment
+        android:id="@+id/viewpager"
+        android:name="com.thuypham.ptithcm.viewpager2.ui.fragment.viewpager.ViewpagerFragment"
+        android:label="ViewpagerFragment"
+        tools:layout="@layout/fragment_viewpager" />
+    <fragment
+        android:id="@+id/viewpager2"
+        android:name="com.thuypham.ptithcm.viewpager2.ui.fragment.viewpager2.Viewpager2Fragment"
+        android:label="Viewpager2Fragment"
+        tools:layout="@layout/fragment_viewpager_2" />
+</navigation>

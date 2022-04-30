@@ -1,0 +1,32 @@
+package com.thuypham.ptithcm.viewpager2.extension
+
+import android.app.Activity
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
+import java.io.File
+
+
+fun AppCompatActivity.shareDataToOtherApp(content: String) {
+    val sendIntent: Intent = Intent().apply {
+        action = Intent.ACTION_SEND
+        putExtra(Intent.EXTRA_TEXT, content)
+        type = "text/plain"
+    }
+    val shareIntent = Intent.createChooser(sendIntent, null)
+    startActivity(shareIntent)
+}
+
+
+fun Activity.shareImageToOtherApp(imagePath: String) {
+    val sendIntent: Intent = Intent().apply {
+        action = Intent.ACTION_SEND
+        val file = File(imagePath)
+        val uri =
+            FileProvider.getUriForFile(this@shareImageToOtherApp, application.packageName, file);
+        putExtra(Intent.EXTRA_STREAM, uri)
+        type = "image/jpeg"
+    }
+    val shareIntent = Intent.createChooser(sendIntent, null)
+    startActivity(shareIntent)
+}

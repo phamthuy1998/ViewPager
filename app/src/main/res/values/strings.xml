@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ViewPager2</string>
+    <string name="btn_edit">Edit</string>
+    <string name="content">Content</string>
+    <string name="btn_save">Save</string>
+    <string name="viewpager_2">Viewpager 2</string>
+    <string name="viewpager">Viewpager</string>
+    <string name="main">Main</string>
+</resources>
