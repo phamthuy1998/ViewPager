@@ -11,6 +11,7 @@ import com.thuypham.ptithcm.viewpager2.databinding.FragmentViewpager2Binding
 import com.thuypham.ptithcm.viewpager2.extension.goBack
 import com.thuypham.ptithcm.viewpager2.extension.navigateTo
 import com.thuypham.ptithcm.viewpager2.extension.setOnSingleClickListener
+import com.thuypham.ptithcm.viewpager2.model.Item
 import com.thuypham.ptithcm.viewpager2.ui.fragment.viewpager.ViewpagerFragment.Companion.DETAIL_KEY
 import com.thuypham.ptithcm.viewpager2.ui.fragment.viewpager.ViewpagerFragment.Companion.ITEM_CHANGE
 
@@ -20,19 +21,32 @@ class Viewpager2Fragment : BaseFragment<FragmentViewpager2Binding>(R.layout.frag
     private var currentPagerPosition = 0
 
     private val listPagerItems = arrayListOf(
-        "This is first page",
-        "This is second page",
-        "This is third page",
+
+        Item("This is first page", R.color.black),
+        Item("This is second page", R.color.red),
+        Item("This is third page", R.color.yellow),
+        Item("This is four page", R.color.green),
+        Item("This is five page", R.color.gray),
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setFragmentResultListener(ITEM_CHANGE) { requestKey, bundle ->
-            val newContent = bundle.getString(DETAIL_KEY)
+            val newContent = bundle.getSerializable(DETAIL_KEY) as Item?
             if (newContent != null) {
                 listPagerItems[currentPagerPosition] = newContent
                 runOnUiThread {
-                    viewpager2Adapter.notifyItemChanged(currentPagerPosition)
+//                    viewpager2Adapter.notifyItemChanged(currentPagerPosition)
+                    viewpager2Adapter.notifyDataSetChanged()
+
+//                    binding.pager.apply {
+//                        viewpager2Adapter = Viewpager2Adapter(requireActivity())
+//                        adapter = viewpager2Adapter
+//
+//                        viewpager2Adapter.submitList(listPagerItems)
+//                        setCurrentItem(currentPagerPosition, true)
+//                    }
+
                 }
             }
         }

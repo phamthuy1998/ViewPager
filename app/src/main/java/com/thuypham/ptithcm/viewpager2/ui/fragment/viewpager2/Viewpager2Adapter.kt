@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.thuypham.ptithcm.viewpager2.model.Item
 import com.thuypham.ptithcm.viewpager2.ui.fragment.viewpager_item.ItemViewPagerFragment
 
 class Viewpager2Adapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
@@ -11,7 +12,7 @@ class Viewpager2Adapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
         const val KEY = "KEY"
     }
 
-    private var listItems: ArrayList<String> = arrayListOf()
+    private var listItems: ArrayList<Item> = arrayListOf()
 
     override fun getItemCount(): Int {
         return listItems.size
@@ -20,13 +21,13 @@ class Viewpager2Adapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
     override fun createFragment(position: Int): Fragment {
         val fragment = ItemViewPagerFragment()
         val bundle = Bundle().apply {
-            putString(KEY, listItems[position])
+            putSerializable(KEY, listItems[position])
         }
         fragment.arguments = bundle
         return fragment
     }
 
-    fun submitList(listItems: ArrayList<String>) {
+    fun submitList(listItems: ArrayList<Item>) {
         this.listItems = listItems
         notifyItemRangeChanged(0, listItems.size)
     }

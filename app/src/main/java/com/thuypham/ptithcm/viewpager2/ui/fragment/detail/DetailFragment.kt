@@ -7,11 +7,13 @@ import com.thuypham.ptithcm.viewpager2.base.BaseFragment
 import com.thuypham.ptithcm.viewpager2.databinding.FragmentDetailBinding
 import com.thuypham.ptithcm.viewpager2.extension.goBack
 import com.thuypham.ptithcm.viewpager2.extension.setOnSingleClickListener
+import com.thuypham.ptithcm.viewpager2.model.Item
 import com.thuypham.ptithcm.viewpager2.ui.fragment.viewpager.ViewpagerFragment.Companion.DETAIL_KEY
 import com.thuypham.ptithcm.viewpager2.ui.fragment.viewpager.ViewpagerFragment.Companion.ITEM_CHANGE
 import com.thuypham.ptithcm.viewpager2.ui.fragment.viewpager2.Viewpager2Adapter
 
 class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_detail) {
+    private var item: Item? = null
     override fun setupView() {
         setupToolbar()
         setData()
@@ -21,7 +23,8 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
     private fun setupEvent() {
         binding.apply {
             btnSave.setOnSingleClickListener {
-                setFragmentResult(ITEM_CHANGE, bundleOf(DETAIL_KEY to edtContent.text.toString()))
+                item?.message = edtContent.text.toString()
+                setFragmentResult(ITEM_CHANGE, bundleOf(DETAIL_KEY to item))
                 goBack()
             }
         }
@@ -34,8 +37,8 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
     }
 
     private fun setData() {
-        val content = arguments?.getString(Viewpager2Adapter.KEY, "Default value")
-        binding.edtContent.setText(content)
+        item = arguments?.getSerializable(Viewpager2Adapter.KEY) as Item?
+        binding.edtContent.setText(item?.message)
     }
 
 }
