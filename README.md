@@ -1,2 +1,2 @@
 # ViewPager
-Test viewpager, vewpager 2, update item viewpager
+Test notifyDataSetChanged, notifyItemChanged of viewpager, vewpager 2
