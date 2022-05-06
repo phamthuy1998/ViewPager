@@ -22,6 +22,7 @@ class Viewpager2Adapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
         val fragment = ItemViewPagerFragment()
         val bundle = Bundle().apply {
             putSerializable(KEY, listItems[position])
+            putInt("pos", position)
         }
         fragment.arguments = bundle
         return fragment

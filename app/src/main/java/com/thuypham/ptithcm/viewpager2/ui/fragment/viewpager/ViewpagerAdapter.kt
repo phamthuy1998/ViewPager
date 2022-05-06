@@ -5,6 +5,7 @@ import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import com.thuypham.ptithcm.viewpager2.model.Item
 import com.thuypham.ptithcm.viewpager2.ui.fragment.viewpager_item.ItemViewPagerFragment
 
 class ViewpagerAdapter(fa: FragmentManager) : FragmentStatePagerAdapter(fa) {
@@ -12,9 +13,9 @@ class ViewpagerAdapter(fa: FragmentManager) : FragmentStatePagerAdapter(fa) {
         const val KEY = "KEY"
     }
 
-    private var listItems: ArrayList<String> = arrayListOf()
+    private var listItems: ArrayList<Item> = arrayListOf()
 
-    fun submitList(listItems: ArrayList<String>) {
+    fun submitList(listItems: ArrayList<Item>) {
         this.listItems = listItems
         notifyDataSetChanged()
     }
@@ -26,7 +27,8 @@ class ViewpagerAdapter(fa: FragmentManager) : FragmentStatePagerAdapter(fa) {
     override fun getItem(position: Int): Fragment {
         val fragment = ItemViewPagerFragment()
         val bundle = Bundle().apply {
-            putString(KEY, listItems[position])
+            putSerializable(KEY, listItems[position])
+            putInt("pos", position)
         }
         fragment.arguments = bundle
         return fragment

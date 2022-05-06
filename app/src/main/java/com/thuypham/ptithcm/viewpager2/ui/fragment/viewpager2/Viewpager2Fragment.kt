@@ -12,11 +12,12 @@ import com.thuypham.ptithcm.viewpager2.extension.goBack
 import com.thuypham.ptithcm.viewpager2.extension.navigateTo
 import com.thuypham.ptithcm.viewpager2.extension.setOnSingleClickListener
 import com.thuypham.ptithcm.viewpager2.model.Item
+import com.thuypham.ptithcm.viewpager2.ui.fragment.viewpager.ViewpagerFragment
 import com.thuypham.ptithcm.viewpager2.ui.fragment.viewpager.ViewpagerFragment.Companion.DETAIL_KEY
 import com.thuypham.ptithcm.viewpager2.ui.fragment.viewpager.ViewpagerFragment.Companion.ITEM_CHANGE
 
 class Viewpager2Fragment : BaseFragment<FragmentViewpager2Binding>(R.layout.fragment_viewpager_2) {
-    private lateinit var viewpager2Adapter: Viewpager2Adapter
+    private  var viewpager2Adapter: Viewpager2Adapter? = null
 
     private var currentPagerPosition = 0
 
@@ -27,25 +28,21 @@ class Viewpager2Fragment : BaseFragment<FragmentViewpager2Binding>(R.layout.frag
         Item("This is third page", R.color.yellow),
         Item("This is four page", R.color.green),
         Item("This is five page", R.color.gray),
+        Item("This is six page", R.color.color_orange_FF9800),
+        Item("This is seven page", R.color.teal_200),
+        Item("This is eight page", R.color.teal_700),
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        currentPagerPosition = arguments?.getInt(ViewpagerFragment.CURRENT_POS,0) ?:0
         setFragmentResultListener(ITEM_CHANGE) { requestKey, bundle ->
             val newContent = bundle.getSerializable(DETAIL_KEY) as Item?
             if (newContent != null) {
                 listPagerItems[currentPagerPosition] = newContent
                 runOnUiThread {
-//                    viewpager2Adapter.notifyItemChanged(currentPagerPosition)
-                    viewpager2Adapter.notifyDataSetChanged()
-
-//                    binding.pager.apply {
-//                        viewpager2Adapter = Viewpager2Adapter(requireActivity())
-//                        adapter = viewpager2Adapter
-//
-//                        viewpager2Adapter.submitList(listPagerItems)
-//                        setCurrentItem(currentPagerPosition, true)
-//                    }
+                    viewpager2Adapter?.notifyItemChanged(currentPagerPosition)
+//                    viewpager2Adapter.notifyDataSetChanged()
 
                 }
             }
@@ -73,8 +70,8 @@ class Viewpager2Fragment : BaseFragment<FragmentViewpager2Binding>(R.layout.frag
             viewpager2Adapter = Viewpager2Adapter(requireActivity())
             adapter = viewpager2Adapter
 
-            viewpager2Adapter.submitList(listPagerItems)
-            currentItem = currentPagerPosition
+            viewpager2Adapter?.submitList(listPagerItems)
+            setCurrentItem(currentPagerPosition, true)
 //            setPageTransformer(ZoomOutPageTransformer())
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageScrollStateChanged(state: Int) {

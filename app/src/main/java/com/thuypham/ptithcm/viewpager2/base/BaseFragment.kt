@@ -19,6 +19,7 @@ import com.thuypham.ptithcm.viewpager2.extension.show
 
 abstract class BaseFragment<T : ViewDataBinding>(private val layoutId: Int) : Fragment() {
 
+    protected val TAG = this::class.java.simpleName
     lateinit var binding: T
 
     override fun onCreateView(
@@ -26,14 +27,16 @@ abstract class BaseFragment<T : ViewDataBinding>(private val layoutId: Int) : Fr
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d(this.javaClass.simpleName, "onCreateView")
+//        Log.d(this.javaClass.simpleName, "onCreateView")
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+        onCreateViewTest()
         return binding.root
     }
 
+    open fun onCreateViewTest(){}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        Log.d(this.javaClass.simpleName, "onViewCreated")
+//        Log.d(this.javaClass.simpleName, "onViewCreated")
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
@@ -148,40 +151,40 @@ abstract class BaseFragment<T : ViewDataBinding>(private val layoutId: Int) : Fr
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d(this.javaClass.simpleName, "onCreate")
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d(this.javaClass.simpleName, "onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d(this.javaClass.simpleName, "onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d(this.javaClass.simpleName, "onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d(this.javaClass.simpleName, "onStop")
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.d(this.javaClass.simpleName, "onDestroyView")
-        hideKeyboard()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d(this.javaClass.simpleName, "onDestroy")
-    }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        Log.d(this.javaClass.simpleName, "onCreate")
+//    }
+//
+//    override fun onStart() {
+//        super.onStart()
+//        Log.d(this.javaClass.simpleName, "onStart")
+//    }
+//
+//    override fun onResume() {
+//        super.onResume()
+//        Log.d(this.javaClass.simpleName, "onResume")
+//    }
+//
+//    override fun onPause() {
+//        super.onPause()
+//        Log.d(this.javaClass.simpleName, "onPause")
+//    }
+//
+//    override fun onStop() {
+//        super.onStop()
+//        Log.d(this.javaClass.simpleName, "onStop")
+//    }
+//
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        Log.d(this.javaClass.simpleName, "onDestroyView")
+//        hideKeyboard()
+//    }
+//
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        Log.d(this.javaClass.simpleName, "onDestroy")
+//    }
 
 }

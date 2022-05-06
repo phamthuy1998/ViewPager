@@ -6,4 +6,6 @@
     <string name="viewpager_2">Viewpager 2</string>
     <string name="viewpager">Viewpager</string>
     <string name="main">Main</string>
+    <string name="color">Color</string>
+    <string name="select_color">Select color</string>
 </resources>

@@ -10,6 +10,16 @@
             android:id="@+id/toolbar"
             layout="@layout/layout_toolbar" />
 
+        <EditText
+            android:id="@+id/edtPage"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:inputType="number"
+            app:layout_constraintBottom_toTopOf="@id/btnViewpager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <Button
             android:id="@+id/btnViewpager"
             android:layout_width="wrap_content"
