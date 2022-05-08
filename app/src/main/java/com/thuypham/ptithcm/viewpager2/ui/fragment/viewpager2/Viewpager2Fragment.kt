@@ -23,14 +23,14 @@ class Viewpager2Fragment : BaseFragment<FragmentViewpager2Binding>(R.layout.frag
 
     private val listPagerItems = arrayListOf(
 
-        Item("This is first page", R.color.black),
-        Item("This is second page", R.color.red),
-        Item("This is third page", R.color.yellow),
-        Item("This is four page", R.color.green),
-        Item("This is five page", R.color.gray),
-        Item("This is six page", R.color.color_orange_FF9800),
-        Item("This is seven page", R.color.teal_200),
-        Item("This is eight page", R.color.teal_700),
+        Item("This is first page", "#FF000000"),
+        Item("This is second page", "#FFFB0000"),
+        Item("This is third page","#FFFFEB3B"),
+        Item("This is four page", "#FF404040"),
+        Item("This is five page", "#FF4CAF50"),
+        Item("This is six page", "#FFFF9800"),
+        Item("This is seven page", "#FFBB86FC"),
+        Item("This is eight page", "#FF6200EE"),
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

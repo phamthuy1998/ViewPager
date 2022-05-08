@@ -20,6 +20,14 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                 val position = if(edtPage.text.isNullOrBlank())0 else edtPage.text.toString().toInt()
                 navigateTo(R.id.viewpager2, bundleOf(ViewpagerFragment.CURRENT_POS to position))
             }
+            btnRecyclerView.setOnSingleClickListener {
+                val position = if(edtPage.text.isNullOrBlank())0 else edtPage.text.toString().toInt()
+                navigateTo(R.id.recyclerView, bundleOf(ViewpagerFragment.CURRENT_POS to position))
+            }
+            btnSnapRecyclerView.setOnSingleClickListener {
+                val position = if(edtPage.text.isNullOrBlank())0 else edtPage.text.toString().toInt()
+                navigateTo(R.id.snapRecyclerView, bundleOf(ViewpagerFragment.CURRENT_POS to position))
+            }
         }
     }
 }

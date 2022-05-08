@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import com.thuypham.ptithcm.viewpager2.model.Item
 import com.thuypham.ptithcm.viewpager2.ui.fragment.viewpager_item.ItemViewPagerFragment
 
-class ViewpagerAdapter(fa: FragmentManager) : FragmentStatePagerAdapter(fa) {
+class ViewpagerAdapter(fa: FragmentManager) : FragmentStatePagerAdapter(fa,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT ) {
     companion object {
         const val KEY = "KEY"
     }

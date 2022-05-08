@@ -8,4 +8,6 @@
     <string name="main">Main</string>
     <string name="color">Color</string>
     <string name="select_color">Select color</string>
+    <string name="snap_recycler_view">Snap Recycler View</string>
+    <string name="recycler_view">Recycler view</string>
 </resources>

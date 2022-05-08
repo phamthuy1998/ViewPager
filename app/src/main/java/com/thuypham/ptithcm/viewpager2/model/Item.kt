@@ -4,5 +4,5 @@ import java.io.Serializable
 
 data class Item (
     var message: String = "",
-    var color: Int= 0
+    var color: String= "ffffff"
 ) : Serializable

@@ -15,7 +15,6 @@ import com.thuypham.ptithcm.viewpager2.model.Item
 import com.thuypham.ptithcm.viewpager2.ui.fragment.viewpager.ViewpagerFragment.Companion.DETAIL_KEY
 import com.thuypham.ptithcm.viewpager2.ui.fragment.viewpager.ViewpagerFragment.Companion.ITEM_CHANGE
 import com.thuypham.ptithcm.viewpager2.ui.fragment.viewpager2.Viewpager2Adapter
-import java.lang.String
 
 
 class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_detail) {
@@ -31,7 +30,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
         binding.apply {
             btnSave.setOnSingleClickListener {
                 item?.message = edtContent.text.toString()
-                if (currentColor != null) item?.color = Color.parseColor("#${currentColor!!.hexCode}")
+                if (currentColor != null) item?.color = "#${currentColor?.hexCode!!}"
                 setFragmentResult(ITEM_CHANGE, bundleOf(DETAIL_KEY to item))
                 goBack()
             }
@@ -42,7 +41,6 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
                     .setPreferenceName("MyColorPickerDialog")
                     .setPositiveButton("ok", ColorEnvelopeListener { envelope, fromUser ->
                         currentColor = envelope
-
                         it.setBackgroundColor(Color.parseColor("#${envelope.hexCode}"))
                     })
                     .setNegativeButton("cancel") { dialogInterface, i -> dialogInterface.dismiss() }
@@ -64,8 +62,8 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
         item = arguments?.getSerializable(Viewpager2Adapter.KEY) as Item?
         binding.edtContent.setText(item?.message)
         item?.color?.let {
-            val hexColor = String.format("#%06X", 0xFFFFFF and it)
-            binding.viewCurrentColor.setBackgroundColor(Color.parseColor(hexColor))
+//            val hexColor = String.format("#%06X", 0xFFFFFF and it)
+            binding.viewCurrentColor.setBackgroundColor(Color.parseColor(item?.color))
         }
     }
 

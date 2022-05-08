@@ -1,27 +1,27 @@
-package com.thuypham.ptithcm.viewpager2.ui.fragment.viewpager
+package com.thuypham.ptithcm.viewpager2.ui.fragment.recyclerview
 
 import android.os.Bundle
+import android.util.Log
 import androidx.core.os.bundleOf
 import androidx.fragment.app.clearFragmentResultListener
 import androidx.fragment.app.setFragmentResultListener
-import androidx.viewpager.widget.ViewPager
+import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.SnapHelper
 import com.thuypham.ptithcm.viewpager2.R
 import com.thuypham.ptithcm.viewpager2.base.BaseFragment
-import com.thuypham.ptithcm.viewpager2.databinding.FragmentViewpagerBinding
+import com.thuypham.ptithcm.viewpager2.databinding.FragmentRecyclerviewBinding
 import com.thuypham.ptithcm.viewpager2.extension.goBack
 import com.thuypham.ptithcm.viewpager2.extension.navigateTo
 import com.thuypham.ptithcm.viewpager2.extension.setOnSingleClickListener
 import com.thuypham.ptithcm.viewpager2.model.Item
+import com.thuypham.ptithcm.viewpager2.ui.fragment.viewpager.ViewpagerFragment
 import com.thuypham.ptithcm.viewpager2.ui.fragment.viewpager2.Viewpager2Adapter
 
-class ViewpagerFragment : BaseFragment<FragmentViewpagerBinding>(R.layout.fragment_viewpager) {
-    companion object {
-        const val ITEM_CHANGE = "REQUEST_KEY"
-        const val DETAIL_KEY = "DETAIL_KEY"
-        const val CURRENT_POS = "CURRENT_POS"
-    }
 
-    private var viewpagerApdapter: ViewpagerAdapter? = null
+class RecyclerViewFragment : BaseFragment<FragmentRecyclerviewBinding>(R.layout.fragment_recyclerview) {
+    private val itemAdapter: ItemAdapter by lazy {
+        ItemAdapter()
+    }
 
     private var currentPagerPosition = 0
 
@@ -29,7 +29,7 @@ class ViewpagerFragment : BaseFragment<FragmentViewpagerBinding>(R.layout.fragme
 
         Item("This is first page", "#FF000000"),
         Item("This is second page", "#FFFB0000"),
-        Item("This is third page","#FFFFEB3B"),
+        Item("This is third page", "#FFFFEB3B"),
         Item("This is four page", "#FF404040"),
         Item("This is five page", "#FF4CAF50"),
         Item("This is six page", "#FFFF9800"),
@@ -39,24 +39,25 @@ class ViewpagerFragment : BaseFragment<FragmentViewpagerBinding>(R.layout.fragme
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        currentPagerPosition = arguments?.getInt(CURRENT_POS, 0) ?: 0
-        setFragmentResultListener(ITEM_CHANGE) { requestKey, bundle ->
-            val newContent = bundle.getSerializable(DETAIL_KEY) as Item?
+        currentPagerPosition = arguments?.getInt(ViewpagerFragment.CURRENT_POS, 0) ?: 0
+        setFragmentResultListener(ViewpagerFragment.ITEM_CHANGE) { requestKey, bundle ->
+            val newContent = bundle.getSerializable(ViewpagerFragment.DETAIL_KEY) as Item?
             if (newContent != null) {
                 listPagerItems[currentPagerPosition] = newContent
                 runOnUiThread {
-                    viewpagerApdapter?.notifyDataSetChanged()
+                    itemAdapter.notifyItemChanged(currentPagerPosition)
                 }
             }
         }
+
     }
 
     override fun setupView() {
         setupToolbar()
-        setupViewPager()
+        setupRecyclerView()
         setupEvent()
-    }
 
+    }
 
     private fun setupEvent() {
         binding.apply {
@@ -66,34 +67,23 @@ class ViewpagerFragment : BaseFragment<FragmentViewpagerBinding>(R.layout.fragme
         }
     }
 
-    private fun setupViewPager() {
-        binding.pager.apply {
-            viewpagerApdapter = ViewpagerAdapter(childFragmentManager)
-            adapter = viewpagerApdapter
-
-            viewpagerApdapter?.submitList(listPagerItems)
-            setCurrentItem(currentPagerPosition, true)
-            addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-
-                }
-
-                override fun onPageSelected(position: Int) {
-                    currentPagerPosition = position
-                }
-
-                override fun onPageScrollStateChanged(state: Int) {
-
-                }
-
-            })
-
+    private fun setupRecyclerView() {
+        Log.d("thuyy","setupRecyclerView ${listPagerItems.size}" )
+        binding.rvItems.apply {
+            val snapHelper: SnapHelper = PagerSnapHelper()
+            snapHelper.attachToRecyclerView(this)
+            adapter = itemAdapter
+            itemAdapter.submitList(listPagerItems)
+            itemAdapter.notifyDataSetChanged()
+            Log.d("thuyy","setupRecyclerView ${listPagerItems.size}" )
+            scrollToPosition(currentPagerPosition)
         }
+
     }
 
 
     private fun setupToolbar() {
-        setToolbarTitle(R.string.viewpager)
+        setToolbarTitle(R.string.recycler_view)
         setLeftBtn(R.drawable.ic_back) {
             goBack()
         }
@@ -101,6 +91,6 @@ class ViewpagerFragment : BaseFragment<FragmentViewpagerBinding>(R.layout.fragme
 
     override fun onDestroy() {
         super.onDestroy()
-        clearFragmentResultListener(ITEM_CHANGE)
+        clearFragmentResultListener(ViewpagerFragment.ITEM_CHANGE)
     }
 }

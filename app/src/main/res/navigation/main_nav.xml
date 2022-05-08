@@ -26,4 +26,14 @@
         android:name="com.thuypham.ptithcm.viewpager2.ui.fragment.viewpager2.Viewpager2Fragment"
         android:label="Viewpager2Fragment"
         tools:layout="@layout/fragment_viewpager_2" />
+    <fragment
+        android:id="@+id/recyclerView"
+        android:name="com.thuypham.ptithcm.viewpager2.ui.fragment.recyclerview.RecyclerViewFragment"
+        android:label="RecyclerViewFragment"
+        tools:layout="@layout/fragment_recyclerview" />
+    <fragment
+        android:id="@+id/snapRecyclerView"
+        android:name="com.thuypham.ptithcm.viewpager2.ui.fragment.snap_recyclerview.SnapRecyclerViewFragment"
+        android:label="SnapRecyclerViewFragment"
+        tools:layout="@layout/fragment_recyclerview" />
 </navigation>

@@ -20,8 +20,7 @@ class ItemViewPagerFragment : BaseFragment<FragmentItemViewpagerBinding>(R.layou
         val content = arguments?.getSerializable(Viewpager2Adapter.KEY) as Item?
 
         binding.tvContent.text = content?.message
-        val hexColor = String.format("#%06X", 0xFFFFFF and (content?.color?: 0))
-        val color: Int = Color.parseColor(hexColor)
+        val color: Int = Color.parseColor(content?.color?:"#FFFFFFFF")
         binding.container.setBackgroundColor(color)
     }
 
