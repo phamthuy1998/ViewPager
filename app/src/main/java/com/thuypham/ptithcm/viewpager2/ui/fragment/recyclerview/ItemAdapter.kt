@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.thuypham.ptithcm.viewpager2.databinding.FragmentItemViewpagerBinding
+import com.thuypham.ptithcm.viewpager2.databinding.ItemRecyclerviewBinding
 import com.thuypham.ptithcm.viewpager2.model.Item
 
 class ItemAdapter(
@@ -21,7 +22,7 @@ class ItemAdapter(
     }
 
     class MediaItemViewHolder(
-        private val binding: FragmentItemViewpagerBinding,
+        private val binding: ItemRecyclerviewBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Item) {
             binding.apply {
@@ -37,7 +38,7 @@ class ItemAdapter(
         viewType: Int,
     ): MediaItemViewHolder {
         Log.d("thuyy","onCreateViewHolder" )
-        val binding = FragmentItemViewpagerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MediaItemViewHolder(binding)
     }
 

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.SnapHelper
 import com.thuypham.ptithcm.viewpager2.R
 import com.thuypham.ptithcm.viewpager2.base.BaseFragment
 import com.thuypham.ptithcm.viewpager2.databinding.FragmentRecyclerviewBinding
+import com.thuypham.ptithcm.viewpager2.databinding.FragmentSnapHelperRecyclerviewBinding
 import com.thuypham.ptithcm.viewpager2.extension.goBack
 import com.thuypham.ptithcm.viewpager2.extension.navigateTo
 import com.thuypham.ptithcm.viewpager2.extension.setOnSingleClickListener
@@ -17,7 +18,7 @@ import com.thuypham.ptithcm.viewpager2.ui.fragment.recyclerview.ItemAdapter
 import com.thuypham.ptithcm.viewpager2.ui.fragment.viewpager.ViewpagerFragment
 import com.thuypham.ptithcm.viewpager2.ui.fragment.viewpager2.Viewpager2Adapter
 
-class SnapRecyclerViewFragment  : BaseFragment<FragmentRecyclerviewBinding>(R.layout.fragment_recyclerview) {
+class SnapRecyclerViewFragment  : BaseFragment<FragmentSnapHelperRecyclerviewBinding>(R.layout.fragment_snap_helper_recyclerview) {
     private val itemAdapter: ItemAdapter by lazy {
         ItemAdapter()
     }
@@ -68,7 +69,7 @@ class SnapRecyclerViewFragment  : BaseFragment<FragmentRecyclerviewBinding>(R.la
 
     private fun setupRecyclerView() {
         binding.rvItems.apply {
-            val snapHelper: SnapHelper = PagerSnapHelper()
+            val snapHelper = PagerSnapHelper()
             snapHelper.attachToRecyclerView(this)
             adapter = itemAdapter
             itemAdapter.submitList(listPagerItems)

@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.core.os.bundleOf
 import androidx.fragment.app.clearFragmentResultListener
 import androidx.fragment.app.setFragmentResultListener
+import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.SnapHelper
 import com.thuypham.ptithcm.viewpager2.R
@@ -70,7 +71,7 @@ class RecyclerViewFragment : BaseFragment<FragmentRecyclerviewBinding>(R.layout.
     private fun setupRecyclerView() {
         Log.d("thuyy","setupRecyclerView ${listPagerItems.size}" )
         binding.rvItems.apply {
-            val snapHelper: SnapHelper = PagerSnapHelper()
+            val snapHelper = LinearSnapHelper()
             snapHelper.attachToRecyclerView(this)
             adapter = itemAdapter
             itemAdapter.submitList(listPagerItems)
